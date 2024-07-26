@@ -1,4 +1,5 @@
 class NewsModel {
+  final Source source;
   final String author;
   final String title;
   final String description;
@@ -8,6 +9,7 @@ class NewsModel {
   final String content;
 
   NewsModel({
+    required this.source,
     required this.author,
     required this.title,
     required this.description,
@@ -19,6 +21,7 @@ class NewsModel {
 
   factory NewsModel.fromMap(Map<String, dynamic> map) {
     return NewsModel(
+      source: Source.fromMap(map['source']),
       author: map['author'] ?? '',
       title: map['title'] ?? '',
       description: map['description'] ?? '',
@@ -27,6 +30,23 @@ class NewsModel {
       publishedAt: DateTime.parse(
           map['publishedAt'] ?? DateTime.now().toIso8601String()),
       content: map['content'] ?? '',
+    );
+  }
+}
+
+class Source {
+  final String id;
+  final String name;
+
+  Source({
+    required this.id,
+    required this.name,
+  });
+
+  factory Source.fromMap(Map<String, dynamic> map) {
+    return Source(
+      id: map['id'] ?? '',
+      name: map['name'] ?? '',
     );
   }
 }

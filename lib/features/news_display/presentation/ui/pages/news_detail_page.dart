@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jaggy/common/extentions/spacer_ext.dart';
 import 'package:jaggy/common/styles/text_styles.dart';
+import 'package:jaggy/features/news_display/data_sources/online_news_datasource_impl.dart';
 
 class NewsDetailPage extends StatelessWidget {
   const NewsDetailPage({super.key});
@@ -37,7 +38,11 @@ class NewsDetailPage extends StatelessWidget {
                   ],
                 ),
                 Spacer(),
-                FilledButton(onPressed: () {}, child: Text('Follow'))
+                FilledButton(
+                    onPressed: () async {
+                      await OnlineNewsDatasourceImpl().getAllNews();
+                    },
+                    child: Text('Follow'))
               ],
             ),
             10.ht,
