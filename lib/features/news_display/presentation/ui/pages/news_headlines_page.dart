@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:jaggy/common/enums/news_coverage_enum.dart';
 import 'package:jaggy/common/extentions/spacer_ext.dart';
+import 'package:jaggy/features/news_display/presentation/ui/pages/tabs/news_tab.dart';
 
 class NewsHeadlinesPage extends StatefulWidget {
   const NewsHeadlinesPage({super.key});
@@ -16,7 +19,10 @@ class _NewsHeadlinesPageState extends State<NewsHeadlinesPage> {
       initialIndex: 0,
 
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: Image.asset('assets/img/khabar.png'),
+          actions: [IconButton(onPressed: (){}, icon: Icon(CupertinoIcons.bell))],
+        ),
         body: Column(children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -32,7 +38,12 @@ class _NewsHeadlinesPageState extends State<NewsHeadlinesPage> {
             Tab(text: 'Travel'),
             Tab(text: 'Science'),
             Tab(text: 'Fashion'),
-          ],isScrollable: true, dividerColor: Colors.transparent, )
+          ],isScrollable: true, dividerColor: Colors.transparent, tabAlignment: TabAlignment.start, )
+          ,Expanded(
+            child: TabBarView(children:
+              NewsCoverageEnum.values.map((e)=> NewsTab(newsCoverage: e)).toList()
+            ),
+          )
 
         ],),
       ),
