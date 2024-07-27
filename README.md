@@ -30,8 +30,8 @@ This Flutter application is designed to showcase skills in Flutter development f
 
 - **MVC Architecture:** The app follows the Model-View-Controller architecture, ensuring a clear separation of concerns:
     - **Model:** Data source and repository
-    - **View:** UI components and screens
-    - **Controller:** State management and business logic
+    - **Presentation:** This section has state management solutions and UI  (Pages, Components).
+      
 
 - **State Management:** Utilizes Cubit with `Future.wait` to load all 8 categories of news simultaneously. And Provider for follow/Unfollow mechanism
 
