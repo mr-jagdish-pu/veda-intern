@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jaggy/common/enums/news_coverage_enum.dart';
+import 'package:jaggy/common/extentions/spacer_ext.dart';
 import 'package:jaggy/features/news_display/presentation/cubit/news_provider_cubit.dart';
 import 'package:jaggy/features/news_display/presentation/ui/components/news_tile_c.dart';
 
@@ -19,9 +20,16 @@ class _NewsTabState extends State<NewsTab> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NewsProviderCubit, NewsState>(builder: (ctx, state) {
-      if (state is NewsInitial && state is NewsLoading) {
+      if (state is NewsInitial || state is NewsLoading) {
         return Center(
-          child: CircularProgressIndicator(),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CircularProgressIndicator(),
+              20.ht,
+              Text("Loading Data")
+            ],
+          ),
         );
       } else if (state is NewsLoaded) {
         switch (widget.newsCoverage) {
@@ -103,7 +111,7 @@ class _NewsTabState extends State<NewsTab> with AutomaticKeepAliveClientMixin {
                 itemBuilder: (ctx, ind) {
                   return NewsTileC(news: news[ind]);
                 },
-                itemCount: news.length,
+                itemCount: state.technologyNews.length - 1,
               );
             }
         }

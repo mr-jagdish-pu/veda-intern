@@ -15,11 +15,14 @@ class NewsHeadlinesPage extends StatefulWidget {
   State<NewsHeadlinesPage> createState() => _NewsHeadlinesPageState();
 }
 
-class _NewsHeadlinesPageState extends State<NewsHeadlinesPage> {
+class _NewsHeadlinesPageState extends State<NewsHeadlinesPage>
+    with SingleTickerProviderStateMixin {
+  late TabController tc;
   @override
   void initState() {
     //WidgetsBinding.instance.addPostFrameCallback()
     BlocProvider.of<NewsProviderCubit>(context).fetchNews();
+    tc = TabController(length: 8, vsync: this);
     super.initState();
   }
 
@@ -34,7 +37,15 @@ class _NewsHeadlinesPageState extends State<NewsHeadlinesPage> {
         appBar: AppBar(
           title: Image.asset('assets/img/khabar.png'),
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.bell))
+            IconButton(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).clearSnackBars();
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text('This feature is comming soon..'),
+                    duration: Duration(milliseconds: 500),
+                  ));
+                },
+                icon: Icon(CupertinoIcons.bell))
           ],
         ),
         body: Column(
@@ -44,14 +55,24 @@ class _NewsHeadlinesPageState extends State<NewsHeadlinesPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    'Latest',
+                  InkWell(
+                    child: const Text(
+                      'Latest',
+                    ),
+                    onTap: () {
+                      BlocProvider.of<NewsProviderCubit>(context).fetchNews();
+                    },
                   ),
                   InkWell(
                     child: Text('See all'),
                     onTap: () {
                       setState(() {
-                        defaultTab = defaultTab < 4 ? 5 : 0;
+                        if (tc.index < 4) {
+                          tc.animateTo(7);
+                        } else {
+                          tc.animateTo(1);
+                        }
+
                         print(defaultTab);
                       });
                     },
@@ -61,6 +82,7 @@ class _NewsHeadlinesPageState extends State<NewsHeadlinesPage> {
             ),
             20.ht,
             TabBar(
+              controller: tc,
               onTap: (int tab) {},
               unselectedLabelStyle: tTheme.bodyMedium,
               labelStyle: HeadlineBlack,
@@ -73,6 +95,7 @@ class _NewsHeadlinesPageState extends State<NewsHeadlinesPage> {
             ),
             Expanded(
               child: TabBarView(
+                  controller: tc,
                   children: NewsCoverageEnum.values
                       .map((e) => NewsTab(newsCoverage: e))
                       .toList()),
