@@ -11,10 +11,3 @@ class NewsRepository {
     return await newsDataSource.getNewsFromCategory(ne);
   }
 }
-/*
-  what is animation? have you used? and ticker
-  diff listview, builder
-  mono repo concept: Generic packages, melos package
-  Stream
-  val name :String = "Hello"
- */

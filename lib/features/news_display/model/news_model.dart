@@ -22,7 +22,7 @@ class NewsModel {
   factory NewsModel.fromMap(Map<String, dynamic> map) {
     return NewsModel(
       source: Source.fromMap(map['source']),
-      author: map['author'] ?? '',
+      author: map['author'] ?? 'Author Not Found',
       title: map['title'] ?? '',
       description: map['description'] ?? '',
       url: map['url'] ?? '',

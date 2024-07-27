@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:jaggy/features/news_display/data_sources/online_news_datasource_impl.dart';
 
 import '../../../../common/enums/news_coverage_enum.dart';
@@ -27,8 +28,10 @@ class NewsProviderCubit extends Cubit<NewsState> {
           scienceNews: allNews[6],
           technologyNews: allNews[7]));
       print(allNews.length);
+    } on DioException catch (e) {
+      emit(NewsError(message: e.message ?? ''));
     } catch (e) {
-      emit(NewsError(message: e.toString()));
+      emit(NewsError(message: 'Something went wrong'));
     }
   }
 }
