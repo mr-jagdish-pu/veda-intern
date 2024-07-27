@@ -4,8 +4,8 @@ part 'api_env.g.dart';
 
 @envied
 abstract class Env {
-  @EnviedField(varName: 'NEWS_API')
-  static const String key = _Env.key;
+  @EnviedField(varName: 'NEWS_API', obfuscate: true)
+  static final String key = _Env.key;
 }
 /*
 flutter pub add envied
