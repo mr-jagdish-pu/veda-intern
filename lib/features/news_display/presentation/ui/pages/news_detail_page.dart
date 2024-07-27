@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:jaggy/common/extentions/spacer_ext.dart';
 import 'package:jaggy/common/styles/text_styles.dart';
-import 'package:jaggy/features/news_display/data_sources/online_news_datasource_impl.dart';
+
+import '../../../../../common/helper_functions/date_formatter.dart';
+import '../../../model/news_model.dart';
 
 class NewsDetailPage extends StatelessWidget {
-  const NewsDetailPage({super.key});
+  final NewsModel newsModel;
+  const NewsDetailPage({super.key, required this.newsModel});
 
   @override
   Widget build(BuildContext context) {
@@ -28,21 +31,17 @@ class NewsDetailPage extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      "BBC News",
+                      newsModel.source.name,
                       style: HeadlineBlack,
                     ),
                     Text(
-                      "14 min ago",
+                      formatDateDifference(newsModel.publishedAt),
                       style: SimpleThinGrey,
                     ),
                   ],
                 ),
                 Spacer(),
-                FilledButton(
-                    onPressed: () async {
-                      await OnlineNewsDatasourceImpl().getAllNews();
-                    },
-                    child: Text('Follow'))
+                FilledButton(onPressed: () async {}, child: Text('Follow'))
               ],
             ),
             10.ht,
@@ -53,19 +52,14 @@ class NewsDetailPage extends StatelessWidget {
               height: 250,
             ),
             10.ht,
-            Text('Europe'),
+            Text(newsModel.author),
             10.ht,
             Text(
-              "Ukraine's President Zelensky to BBC: Blood money being paid for Russian oil",
+              newsModel.title,
               style: HeadlineBlack.copyWith(fontSize: 18),
             ),
             15.ht,
-            Text(
-                """Ukrainian President Volodymyr Zelensky has accused European countries that continue to buy Russian oil of "earning their money in other people's blood".
-
-In an interview with the BBC, President Zelensky singled out Germany and Hungary, accusing them of blocking efforts to embargo energy sales, from which Russia stands to make up to £250bn (\$326bn) this year.
-
-There has been a growing frustration among Ukraine's leadership with Berlin, which has backed some sanctions against Russia but so far resisted calls to back tougher action on oil sales."""),
+            Text(""" ${newsModel.content}"""),
             10.ht,
             FilledButton(onPressed: () {}, child: Text('Full News Here...'))
           ],

@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jaggy/common/enums/news_coverage_enum.dart';
+import 'package:jaggy/common/extentions/news_coverage_ext.dart';
 import 'package:jaggy/common/extentions/spacer_ext.dart';
 import 'package:jaggy/common/styles/text_styles.dart';
+import 'package:jaggy/features/news_display/presentation/cubit/news_provider_cubit.dart';
 import 'package:jaggy/features/news_display/presentation/ui/pages/tabs/news_tab.dart';
 
 class NewsHeadlinesPage extends StatefulWidget {
@@ -13,6 +16,13 @@ class NewsHeadlinesPage extends StatefulWidget {
 }
 
 class _NewsHeadlinesPageState extends State<NewsHeadlinesPage> {
+  @override
+  void initState() {
+    //WidgetsBinding.instance.addPostFrameCallback()
+    BlocProvider.of<NewsProviderCubit>(context).fetchNews();
+    super.initState();
+  }
+
   int defaultTab = 0;
   @override
   Widget build(BuildContext context) {
@@ -51,18 +61,12 @@ class _NewsHeadlinesPageState extends State<NewsHeadlinesPage> {
             ),
             20.ht,
             TabBar(
+              onTap: (int tab) {},
               unselectedLabelStyle: tTheme.bodyMedium,
               labelStyle: HeadlineBlack,
-              tabs: const [
-                Tab(text: 'All'),
-                Tab(text: 'Sports'),
-                Tab(text: 'Politics'),
-                Tab(text: 'Business'),
-                Tab(text: 'Health'),
-                Tab(text: 'Travel'),
-                Tab(text: 'Science'),
-                Tab(text: 'Fashion'),
-              ],
+              tabs: NewsCoverageEnum.values
+                  .map((e) => Tab(text: e.title.toUpperCase()))
+                  .toList(),
               isScrollable: true,
               dividerColor: Colors.transparent,
               tabAlignment: TabAlignment.start,

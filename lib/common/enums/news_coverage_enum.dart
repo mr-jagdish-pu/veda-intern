@@ -1,1 +1,10 @@
-enum NewsCoverageEnum {all, sports, politics, business, health, travel,science, fashion}
+enum NewsCoverageEnum {
+  general,
+  sports,
+  politics,
+  business,
+  health,
+  entertainment,
+  science,
+  technology
+}

@@ -3,22 +3,22 @@ import '../enums/news_coverage_enum.dart';
 extension NewsCoverageEnumExtension on NewsCoverageEnum {
   String get title {
     switch (this) {
-      case NewsCoverageEnum.all:
-        return 'All';
+      case NewsCoverageEnum.general:
+        return 'general';
       case NewsCoverageEnum.sports:
-        return 'Sports';
+        return 'sports';
       case NewsCoverageEnum.politics:
-        return 'Politics';
+        return 'politics';
       case NewsCoverageEnum.business:
-        return 'Business';
+        return 'business';
       case NewsCoverageEnum.health:
-        return 'Health';
-      case NewsCoverageEnum.travel:
-        return 'Travel';
+        return 'health';
+      case NewsCoverageEnum.entertainment:
+        return 'entertainment';
       case NewsCoverageEnum.science:
-        return 'Science';
-      case NewsCoverageEnum.fashion:
-        return 'Fashion';
+        return 'science';
+      case NewsCoverageEnum.technology:
+        return 'technology';
     }
   }
 }
