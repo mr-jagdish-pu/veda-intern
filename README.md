@@ -50,6 +50,13 @@ This Flutter application is designed to showcase skills in Flutter development f
    ```bash
    https://newsapi.org/
 
+
+
+# Some API responses are not consitent. I tried to be myself and tried to resolve that, Hope you will like that.
+
+
+
+
 Default API : da8ed2d39448467a866b806159bfa6c7
 
 ![Screenshot_20240727-180204_Khabar_Nepal](https://github.com/user-attachments/assets/f495105e-7e95-4813-a972-11b23d4d22c3)
@@ -57,7 +64,6 @@ Default API : da8ed2d39448467a866b806159bfa6c7
 ![Screenshot_20240727-180153](https://github.com/user-attachments/assets/16c754ed-6c84-47c0-b67f-1900b9f03861)![Screenshot_20240727-180227_Android_System](https://github.com/user-attachments/assets/c9e66586-da8a-453f-94aa-8baab1cc473e)
 ![Screenshot_20240727-180217_Khabar_Nepal](https://github.com/user-attachments/assets/1c07c937-67a1-4ba7-bd87-366a3b441405)
 
-Some API responses are not consitent. I tried to be myself and tried to resolve that, Hope you will like that.
 
 
 
