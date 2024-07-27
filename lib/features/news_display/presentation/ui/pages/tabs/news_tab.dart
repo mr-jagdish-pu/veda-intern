@@ -1,52 +1,123 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jaggy/common/enums/news_coverage_enum.dart';
+import 'package:jaggy/features/news_display/presentation/cubit/news_provider_cubit.dart';
+import 'package:jaggy/features/news_display/presentation/ui/components/news_tile_c.dart';
 
-import '../../components/news_tile_c.dart';
+import '../../../../model/news_model.dart';
 
 class NewsTab extends StatefulWidget {
   final NewsCoverageEnum newsCoverage;
+
   const NewsTab({super.key, required this.newsCoverage});
 
   @override
   State<NewsTab> createState() => _NewsTabState();
 }
 
-class _NewsTabState extends State<NewsTab> {
+class _NewsTabState extends State<NewsTab> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        NewsTileC(
-          about: "europe",
-          content: "",
-          headline:
-              "Hello i am headlineHello i am headlineHello i am headlineHello i am headlineHello i am headline",
-          newsAgent: "BBC",
-          publishedAt: DateTime.now(),
-          image:
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9Gvl-o1u8qzqRu_D5UhHh9_-pczQBMluwaA&s",
-        ),
-        NewsTileC(
-          about: "europe",
-          content: "",
-          headline:
-              "Hello i am headlineHello i am headlineHello i am headlineHello i am headlineHello i am headline",
-          newsAgent: "BBC",
-          publishedAt: DateTime.now(),
-          image:
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9Gvl-o1u8qzqRu_D5UhHh9_-pczQBMluwaA&s",
-        ),
-        NewsTileC(
-          about: "europe",
-          content: "",
-          headline:
-              "Hello i am headlineHello i am headlineHello i am headlineHello i am headlineHello i am headline",
-          newsAgent: "BBC",
-          publishedAt: DateTime.now(),
-          image:
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9Gvl-o1u8qzqRu_D5UhHh9_-pczQBMluwaA&s",
-        )
-      ],
-    );
+    return BlocBuilder<NewsProviderCubit, NewsState>(builder: (ctx, state) {
+      if (state is NewsInitial && state is NewsLoading) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      } else if (state is NewsLoaded) {
+        switch (widget.newsCoverage) {
+          case NewsCoverageEnum.general:
+            {
+              final List<NewsModel> news = state.allNews;
+              return ListView.builder(
+                itemBuilder: (ctx, ind) {
+                  return NewsTileC(news: news[ind]);
+                },
+                itemCount: news.length,
+              );
+            }
+
+          case NewsCoverageEnum.sports:
+            {
+              final List<NewsModel> news = state.sportsNews;
+              return ListView.builder(
+                itemBuilder: (ctx, ind) {
+                  return NewsTileC(news: news[ind]);
+                },
+                itemCount: news.length,
+              );
+            }
+          case NewsCoverageEnum.politics:
+            {
+              final List<NewsModel> news = state.politicsNews;
+              return ListView.builder(
+                itemBuilder: (ctx, ind) {
+                  return NewsTileC(news: news[ind]);
+                },
+                itemCount: news.length,
+              );
+            }
+          case NewsCoverageEnum.business:
+            {
+              final List<NewsModel> news = state.businessNews;
+              return ListView.builder(
+                itemBuilder: (ctx, ind) {
+                  return NewsTileC(news: news[ind]);
+                },
+                itemCount: news.length,
+              );
+            }
+          case NewsCoverageEnum.health:
+            {
+              final List<NewsModel> news = state.healthNews;
+              return ListView.builder(
+                itemBuilder: (ctx, ind) {
+                  return NewsTileC(news: news[ind]);
+                },
+                itemCount: news.length,
+              );
+            }
+          case NewsCoverageEnum.entertainment:
+            {
+              final List<NewsModel> news = state.entertainmentNews;
+              return ListView.builder(
+                itemBuilder: (ctx, ind) {
+                  return NewsTileC(news: news[ind]);
+                },
+                itemCount: news.length,
+              );
+            }
+          case NewsCoverageEnum.science:
+            {
+              final List<NewsModel> news = state.scienceNews;
+              return ListView.builder(
+                itemBuilder: (ctx, ind) {
+                  return NewsTileC(news: news[ind]);
+                },
+                itemCount: news.length,
+              );
+            }
+          case NewsCoverageEnum.technology:
+            {
+              final List<NewsModel> news = state.technologyNews;
+              return ListView.builder(
+                itemBuilder: (ctx, ind) {
+                  return NewsTileC(news: news[ind]);
+                },
+                itemCount: news.length,
+              );
+            }
+        }
+      } else if (state is NewsError) {
+        return Center(
+          child: Text(state.message),
+        );
+      } else {
+        return Container();
+      }
+    });
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
