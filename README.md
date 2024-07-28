@@ -45,10 +45,20 @@ This Flutter application is designed to showcase skills in Flutter development f
    https://github.com/mr-jagdish-pu/veda-intern
 
 
-2. **Add your API Key of https://newsapi.org/: (Must)**
+2. **Have your API Key of https://newsapi.org/: (Must)**
 
    ```bash
    https://newsapi.org/
+
+
+3. **Add your API Key of https://newsapi.org/ in project: (Must)**
+   Add your api key in .env file like:
+   NEWS_API=your_api_key
+   
+
+   ```bash
+   dart run build_runner build
+   
 
 
 
