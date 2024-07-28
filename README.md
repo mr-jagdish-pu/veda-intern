@@ -57,9 +57,8 @@ This Flutter application is designed to showcase skills in Flutter development f
    
 
    ```bash
+   NEWS_API=your_api_key
    dart run build_runner build
-   
-
 
 
 # Some API responses are not consitent. I tried to be myself and tried to resolve that, Hope you will like that.
